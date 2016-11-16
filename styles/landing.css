@@ -1,20 +1,9 @@
 
- body.landing {
-     background-color: rgb(58,23,63); /* sets the background color to an RGB value (see below) */
- }
+ 
  body.landing {
      background-color: rgb(58,23,63);
  }
  
- .navbar {
-     padding: 0.5rem;
-     background-color: rgb(101,18,95);
- }
- 
- .navbar .logo {
-     position: relative;  
-     left: 2rem;
- }
 .her0-content {
     position: relative;
     min-height: 600px;
@@ -55,7 +44,7 @@
 .point .point-title{
     font-size: 1.25rem;
 }
-.ion-music-not,
+.ion-music-note,
 .ion-radio-waves,
 .ion-iphone {
     color: rgb(233,50,117);
