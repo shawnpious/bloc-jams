@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 *, *:before, *:after {
     -moz-box-sizing: border-box;
@@ -43,11 +44,33 @@ container {
      .column.third { width: 33.3%; }
      .column.fourth { width: 25%; }
      .column.flow-opposite { float: right; }  
+=======
+*, *::before, *::after {
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     box-sizing: border-box;
+ }
+html {
+     height: 100%; /* makes sure our HTML takes up 100% of the browser window */
+     font-size: 100%;
+ }
+ 
+ body {
+     font-family: 'Open Sans'; /* sets our font to the "Open Sans" typeface */
+     color: white;             /* sets the text color to white */
+     min-height: 100%;         /* says the height of the body must be, at minimum, 100% of the window */
+ }
+ 
+ /* Medium and small screens (640px) */
+ @media (min-width: 640px) {
+      html { font-size: 112%; }
+>>>>>>> assignment-4-clearfix
    /* Style information will go here */
  }
  
  /* Large screens (1024px) */
  @media (min-width: 1024px) {
+<<<<<<< HEAD
   html { font-size: 120%; }
    /* Style information will go here */
  }
@@ -60,3 +83,8 @@ container {
 .clearfix::after {
    clear: both;
 }
+=======
+      html { font-size: 120%; }
+   /* Style information will go here */
+ }
+>>>>>>> assignment-4-clearfix
