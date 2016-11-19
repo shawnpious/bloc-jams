@@ -49,7 +49,6 @@
      -webkit-transition-delay: 0.2s;
      -moz-transition-delay: 0.2s;
      transition-delay: 0.2s;
-    transform: rotate3d('70deg')
 }
 
 .point .point-title{
