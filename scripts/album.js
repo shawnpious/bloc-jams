@@ -135,19 +135,19 @@ var setCurrentAlbum = function (album) {
 
     }
 };
-//if (typeof yourFunctionName == 'function') { 
-//  yourFunctionName(); 
+//if (typeof yourFunctionName == 'function') {
+//  yourFunctionName();
 //}
 var findParentByClassName = function (element, targetClass) {
-    if (typeof element !== element.parentElement) {
+    if (!element.parentElement) {
         alert("No parent found")
     }
     var currentParent = element.parentElement;
-    if (currentParent.className != targetClass) {
-        alert("No parent found with that class name")
-    }
-    while (currentParent.className != targetClass && currentParent.className !== null) {
+    while (currentParent && currentParent.className != targetClass) {
         currentParent = currentParent.parentElement;
+    }
+    if (!currentParent) {
+        alert("No parent found with that class name")
     }
     return currentParent;
 
@@ -194,7 +194,7 @@ var clickHandler = function (targetElement) {
 
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
-//album button templates 
+//album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 // store state of current playing song
