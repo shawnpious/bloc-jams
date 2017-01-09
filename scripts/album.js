@@ -1,5 +1,5 @@
 var setSong = function (songNumber) {
-setSong(songNumber); = parseInt(songNumber);
+	setSong(songNumber) = parseInt(songNumber);
 	currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 };
 var getSongNumberCell = function (number) {
@@ -13,18 +13,18 @@ var createSongRow = function (songNumber, songName, songLength) {
     var clickHandler = function () {
         var songNumber = parseInt($(this).attr('data-song-number'));
 
-        if (setSong(songNumber); !== null) {
+        if (setSong(songNumber) !== null) {
             // Revert to song number for currently playing song because user started playing new song.
             var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingCell.html(setSong(songNumber););
         }
-        if (setSong(songNumber); !== songNumber) {
+        if (setSong(songNumber) !== songNumber) {
             // Switch from Play -> Pause button to indicate new song is playing.
             $(this).html(pauseButtonTemplate);
             setSong(songNumber); = songNumber;
 			currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 			updatePlayerBarSong();
-        } else if (setSong(songNumber); === songNumber) {
+        } else if (setSong(songNumber) === songNumber) {
             // Switch from Pause -> Play button to pause currently playing song.
             $(this).html(playButtonTemplate);
             $('.main-controls .play-pause').html(playerBarPlayButton);
@@ -38,7 +38,7 @@ var createSongRow = function (songNumber, songName, songLength) {
         var songNumberCell = parseInt($(this).find('.song-item-number'));
         var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
-        if (songNumber !== setSong(songNumber);) {
+        if (songNumber !== setSong(songNumber)) {
             songNumberCell.html(playButtonTemplate);
         }
     };
@@ -47,7 +47,7 @@ var createSongRow = function (songNumber, songName, songLength) {
         var songNumberCell = parseInt($(this).find('.song-item-number'));
         var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
-        if (songNumber !== setSong(songNumber);) {
+        if (songNumber !== setSong(songNumber)) {
             songNumberCell.html(songNumber);
         }
     console.log("songNumber type is " + typeof songNumber + "\n and setSong(songNumber); type is " + typeof setSong(songNumber););
