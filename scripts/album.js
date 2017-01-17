@@ -8,8 +8,21 @@ var setSong = function (songNumber) {
 		 	formats: [ 'mp3' ],
          	preload: true
 		});
-
+        
+        setVolume(currentVolume);
 };
+
+var seek = function(time) {
+     if (currentSoundFile) {
+         currentSoundFile.setTime(time);
+     }
+ }
+ 
+var setVolume = function(volume) {
+     if (currentSoundFile) {
+         currentSoundFile.setVolume(volume);
+     }
+ };
 
 var getSongNumberCell = function (number) {
 	return $('.song-item-number[data-song-number="' + number + '"]');
@@ -33,8 +46,15 @@ var createSongRow = function (songNumber, songName, songLength) {
             setSong(songNumber);
 			currentSoundFile.play();
             updateSeekBarWhileSongPlays();
-			$(this).html(pauseButtonTemplate);			
-			currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+            currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+			 
+            var $volumeFill = $('.volume .fill');
+            var $volumeThumb = $('.volume .thumb');
+            $volumeFill.width(currentVolume + '%');
+            $volumeThumb.css({left: currentVolume + '%'});
+            
+            
+            $(this).html(pauseButtonTemplate);			
 			updatePlayerBarSong();
             
         } else if (currentlyPlayingSongNumber == songNumber) {
@@ -129,29 +149,38 @@ var updateSeekBarWhileSongPlays = function() {
 var setupSeekBars = function() {
     var $seekBars = $('.player-bar .seek-bar');
  
-     $seekBars.click(function(event) {
-         // #3
-         var offsetX = event.pageX - $(this).offset().left;
-         var barWidth = $(this).width();
-         // #4
-         var seekBarFillRatio = offsetX / barWidth;
- 
-         // #5
-         updateSeekPercentage($(this), seekBarFillRatio);
-     });
-// #7
-$seekBars.find('.thumb').mousedown(function(event) {
-         // #8
-    var $seekBar = $(this).parent();
- 
-         // #9
-    $(document).bind('mousemove.thumb', function(event){
-        var offsetX = event.pageX - $seekBar.offset().left;
-        var barWidth = $seekBar.width();
+      $seekBars.click(function(event) {
+        var offsetX = event.pageX - $(this).offset().left;
+        var barWidth = $(this).width();
         var seekBarFillRatio = offsetX / barWidth;
- 
-        updateSeekPercentage($seekBar, seekBarFillRatio);
+        
+        if ($(this).parent().attr('class') == 'seek-control') {
+            seek(seekBarFillRatio * currentSoundFile.getDuration());
+        } else {
+            setVolume(seekBarFillRatio * 100);   
+        }
+        
+        updateSeekPercentage($(this), seekBarFillRatio);
     });
+
+    $seekBars.find('.thumb').mousedown(function(event) {
+
+        var $seekBar = $(this).parent();
+
+        $(document).bind('mousemove.thumb', function(event){
+            var offsetX = event.pageX - $seekBar.offset().left;
+            var barWidth = $seekBar.width();
+            var seekBarFillRatio = offsetX / barWidth;
+            
+            if ($seekBar.parent().attr('class') == 'seek-control') {
+                seek(seekBarFillRatio * currentSoundFile.getDuration());   
+            } else {
+                setVolume(seekBarFillRatio);
+            }
+            
+            updateSeekPercentage($seekBar, seekBarFillRatio);
+        });
+
  
          // #10
     $(document).bind('mouseup.thumb', function() {
@@ -256,6 +285,8 @@ var currentAlbum = null;
 var currentlyPlayingSongNumber = null;
 var currentSongFromAlbum = null;
 var currentSoundFile = null;
+var currentVolume = 80;
+
 	
 //play bar play-pause buttons
 var playerBarPlayButton = '<span class="ion-play"></span>';
